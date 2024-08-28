@@ -1,6 +1,11 @@
 package models;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.sql.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "users")
@@ -23,11 +28,17 @@ public class userModel {
     private Boolean sex;
     @Column(nullable = false)
     private String email;
+    @CreationTimestamp
+    @Temporal(TemporalType.DATE)  // Đảm bảo lưu cả ngày và giờ
+    private Date createdDate;
+    @UpdateTimestamp
+    @Temporal(TemporalType.DATE)  // Đảm bảo lưu cả ngày và giờ
+    private Date updatedDate;
 
     public userModel() {
     }
 
-    public userModel(String id, String name, String address, String userName, String password, String telePhone, Boolean sex, String email) {
+    public userModel(String id, String name, String address, String userName, String password, String telePhone, Boolean sex, String email, Date createdDate, Date updatedDate) {
         this.id = id;
         this.name = name;
         this.address = address;
@@ -36,9 +47,10 @@ public class userModel {
         this.telePhone = telePhone;
         this.sex = sex;
         this.email = email;
+        this.createdDate = createdDate;
+        this.updatedDate = updatedDate;
     }
-//    @Id
-//    @GeneratedValue
+
     public String getId() {
         return id;
     }
@@ -103,4 +115,35 @@ public class userModel {
         this.email = email;
     }
 
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public Date getUpdatedDate() {
+        return updatedDate;
+    }
+
+    public void setUpdatedDate(Date updatedDate) {
+        this.updatedDate = updatedDate;
+    }
+
+    @Override
+    public String toString() {
+        return "userModel{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", telePhone='" + telePhone + '\'' +
+                ", sex=" + sex +
+                ", email='" + email + '\'' +
+                ", createdDate=" + createdDate +
+                ", updatedDate=" + updatedDate +
+                '}';
+    }
 }

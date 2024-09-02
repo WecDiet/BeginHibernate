@@ -4,12 +4,14 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.io.Serializable;
 import java.sql.Date;
+import java.time.Instant;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "users")
-public class userModel {
+public class userModel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID) // tự động cấp id cho userID
     @Column(nullable = false) // Không cho dữ liệu null
